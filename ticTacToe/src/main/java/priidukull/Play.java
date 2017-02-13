@@ -1,6 +1,14 @@
 package priidukull;
 
-public class Play {
+import java.util.InputMismatchException;
+
+public class Play implements Runnable {
+    private final TicTacToeScanner sc;
+
+    Play(Factory ticTacToeScannerFactory) {
+        this.sc = (TicTacToeScanner) ticTacToeScannerFactory.createInstance();
+    }
+
     void printBoard() {
         System.out.println("_______");
         System.out.println("|1|2|3|");
@@ -8,23 +16,22 @@ public class Play {
         System.out.println("|7|8|9|");
     }
 
-    int playerInput() {
-        TicTacToeScanner sc = new TicTacToeScanner();
-        return sc.readInput();
-    }
-
     void printPrompt() {
         System.out.println("Make your move, sir");
     }
 
-    public static void main(String[] args) {
-        Play play = new Play();
-        TicTacToeScanner sc = new TicTacToeScanner();
-        play.printBoard();
-        play.printPrompt();
-        int input = play.playerInput();
-        //int input = play.readInput();
-
+    public int playerInput() {
+        try {
+            return sc.readInput();
+        } catch (InputMismatchException e) {
+            return playerInput();
+        }
     }
 
+    public void run() {
+        printBoard();
+        printPrompt();
+        int input = playerInput();
+        //int input = play.readInput();
+    }
 }

@@ -23,7 +23,7 @@ public class TicTacToeScannerTest {
         assertEquals(expected, actual);
     }
 
-    @Test(expected=InputMismatchException.class)
+    @Test(expected = InputMismatchException.class)
     public void readInputWithNonNumericInputTest() {
         String input = "foo";
         InputStream in = new ByteArrayInputStream(input.getBytes());
@@ -33,5 +33,4 @@ public class TicTacToeScannerTest {
 
         assertTrue(true);
     }
-
 }
