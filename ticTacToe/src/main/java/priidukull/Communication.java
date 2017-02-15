@@ -1,11 +1,9 @@
 package priidukull;
 
-import java.util.InputMismatchException;
-
-public class Play implements Runnable {
+class Communication {
     private final TicTacToeScanner sc;
 
-    Play(Factory ticTacToeScannerFactory) {
+    Communication(Factory ticTacToeScannerFactory) {
         this.sc = (TicTacToeScanner) ticTacToeScannerFactory.createInstance();
     }
 
@@ -20,18 +18,17 @@ public class Play implements Runnable {
         System.out.println("Make your move, sir");
     }
 
-    public int playerInput() {
+    int playerInput() {
+        String input = sc.readInput();
         try {
-            return sc.readInput();
-        } catch (InputMismatchException e) {
+            int inputNumber = Integer.parseInt(input);
+            if (inputNumber < 1 || inputNumber > 9) {
+                throw new NumberFormatException();
+            }
+            return inputNumber;
+        } catch (NumberFormatException e) {
+            System.out.println("Please insert a number in the range 0-9");
             return playerInput();
         }
-    }
-
-    public void run() {
-        printBoard();
-        printPrompt();
-        int input = playerInput();
-        //int input = play.readInput();
     }
 }
