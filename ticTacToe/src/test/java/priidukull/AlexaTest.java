@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import priidukull.board.STATE;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -39,10 +40,9 @@ public class AlexaTest {
 
     @Test
     public void playerInputWithNonNumericInputTest() throws Exception {
-        int expected = 1;
         TicTacToeScannerFactory factory = mock(TicTacToeScannerFactory.class);
-        TicTacToeScanner sc = mock(TicTacToeScanner.class);
-        when(sc.readInput()).thenAnswer(new Answer<String>() {
+        TicTacToeScanner scanner = mock(TicTacToeScanner.class);
+        when(scanner.readInput()).thenAnswer(new Answer<String>() {
             private int count = 0;
             public String answer(InvocationOnMock invocation) throws Throwable {
                 if (count++ == 0)
@@ -50,17 +50,19 @@ public class AlexaTest {
                 return "1";
             }
         });
-        when(factory.createInstance()).thenReturn(sc);
+        when(factory.createInstance()).thenReturn(scanner);
+        Alexa alexa = new Alexa(factory);
 
-        assertEquals(expected, new Alexa(factory).playerInput());
+        alexa.playerInput(STATE.X);
+
+        assertEquals(STATE.X, alexa.getBoard().getValue(1));
     }
 
     @Test
     public void playerInputNotInRangeTest() {
-        int expected = 1;
         TicTacToeScannerFactory factory = mock(TicTacToeScannerFactory.class);
-        TicTacToeScanner sc = mock(TicTacToeScanner.class);
-        when(sc.readInput()).thenAnswer(new Answer<Object>() {
+        TicTacToeScanner scanner = mock(TicTacToeScanner.class);
+        when(scanner.readInput()).thenAnswer(new Answer<Object>() {
             private int count = 0;
             public String answer(InvocationOnMock invocation) throws Throwable {
                 if (count++ == 0)
@@ -68,17 +70,19 @@ public class AlexaTest {
                 return "1";
             }
         });
-        when(factory.createInstance()).thenReturn(sc);
+        when(factory.createInstance()).thenReturn(scanner);
+        Alexa alexa = new Alexa(factory);
 
-        assertEquals(expected, new Alexa(factory).playerInput());
+        alexa.playerInput(STATE.X);
+
+        assertEquals(STATE.X, alexa.getBoard().getValue(1));
     }
 
     @Test
     public void playerInputFloatTest() {
-        int expected = 1;
         TicTacToeScannerFactory factory = mock(TicTacToeScannerFactory.class);
-        TicTacToeScanner sc = mock(TicTacToeScanner.class);
-        when(sc.readInput()).thenAnswer(new Answer<Object>() {
+        TicTacToeScanner scanner = mock(TicTacToeScanner.class);
+        when(scanner.readInput()).thenAnswer(new Answer<Object>() {
             private int count = 0;
             public String answer(InvocationOnMock invocation) throws Throwable {
                 if (count++ == 0)
@@ -86,8 +90,16 @@ public class AlexaTest {
                 return "1";
             }
         });
-        when(factory.createInstance()).thenReturn(sc);
+        when(factory.createInstance()).thenReturn(scanner);
+        Alexa alexa = new Alexa(factory);
 
-        assertEquals(expected, new Alexa(factory).playerInput());
+        alexa.playerInput(STATE.X);
+
+        assertEquals(STATE.X, alexa.getBoard().getValue(1));
+    }
+
+    @Test
+    public void playerInputSquareNotEmptyTest() {
+
     }
 }

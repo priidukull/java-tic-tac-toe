@@ -1,5 +1,5 @@
 package priidukull;
 
-interface Factory {
+public interface Factory {
     Object createInstance();
 }

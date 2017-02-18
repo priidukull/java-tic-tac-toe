@@ -6,8 +6,12 @@ import java.util.Map;
 public class Board {
     private Map squares = new HashMap<Integer, Square>();
 
-    public Map getSquares() {
-        return squares;
+    public Square getSquare(Integer s) {
+        return (Square) squares.get(s);
+    }
+
+    public STATE getValue(Integer s) {
+        return getSquare(s).getValue();
     }
 
     public void setSquares(Map squares) {
