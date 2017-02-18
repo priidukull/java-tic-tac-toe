@@ -42,7 +42,7 @@ public class AlexaTest {
         int expected = 1;
         TicTacToeScannerFactory factory = mock(TicTacToeScannerFactory.class);
         TicTacToeScanner sc = mock(TicTacToeScanner.class);
-        when(sc.readInput()).thenAnswer(new Answer<Object>() {
+        when(sc.readInput()).thenAnswer(new Answer<String>() {
             private int count = 0;
             public String answer(InvocationOnMock invocation) throws Throwable {
                 if (count++ == 0)

@@ -16,7 +16,7 @@ public class Board {
 
     public Board() {
         for (int i=1; i<=9; i++) {
-            squares.put(i, new Square(i).toString());
+            squares.put(i, new Square(i));
         }
     }
 
