@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
-public class CommunicationTest {
+public class AlexaTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @Before
@@ -28,21 +28,11 @@ public class CommunicationTest {
     }
 
     @Test
-    public void printBoardTest() throws Exception {
-        String expected = "_______\n|1|2|3|\n|4|5|6|\n|7|8|9|\n";
-        TicTacToeScannerFactory factory = new TicTacToeScannerFactory();
-
-        new Communication(factory).printBoard();
-
-        assertEquals(expected, outContent.toString());
-    }
-
-    @Test
     public void printPromptTest() throws Exception {
         String expected = "Make your move, sir\n";
         TicTacToeScannerFactory factory = new TicTacToeScannerFactory();
 
-        new Communication(factory).printPrompt();
+        new Alexa(factory).printPrompt();
 
         assertEquals(expected, outContent.toString());
     }
@@ -62,7 +52,7 @@ public class CommunicationTest {
         });
         when(factory.createInstance()).thenReturn(sc);
 
-        assertEquals(expected, new Communication(factory).playerInput());
+        assertEquals(expected, new Alexa(factory).playerInput());
     }
 
     @Test
@@ -80,6 +70,24 @@ public class CommunicationTest {
         });
         when(factory.createInstance()).thenReturn(sc);
 
-        assertEquals(expected, new Communication(factory).playerInput());
+        assertEquals(expected, new Alexa(factory).playerInput());
+    }
+
+    @Test
+    public void playerInputFloatTest() {
+        int expected = 1;
+        TicTacToeScannerFactory factory = mock(TicTacToeScannerFactory.class);
+        TicTacToeScanner sc = mock(TicTacToeScanner.class);
+        when(sc.readInput()).thenAnswer(new Answer<Object>() {
+            private int count = 0;
+            public String answer(InvocationOnMock invocation) throws Throwable {
+                if (count++ == 0)
+                    return "5.1";
+                return "1";
+            }
+        });
+        when(factory.createInstance()).thenReturn(sc);
+
+        assertEquals(expected, new Alexa(factory).playerInput());
     }
 }

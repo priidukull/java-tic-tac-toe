@@ -1,17 +1,28 @@
 package priidukull;
 
+import priidukull.board.Board;
+import priidukull.board.Square;
+
+import static priidukull.board.STATE.X;
+
 class TicTacToeRunner implements Runnable {
-    private Communication c;
+    private Alexa c;
+    private Board board = new Board();
 
     TicTacToeRunner() {
         TicTacToeScannerFactory factory = new TicTacToeScannerFactory();
-        this.c = new Communication(factory);
+        this.c = new Alexa(factory);
     }
 
     public void run() {
-        c.printBoard();
+        playerTurn();
+    }
+
+    void playerTurn() {
+        board.printBoard();
         c.printPrompt();
         int input = c.playerInput();
-        //int input = play.readInput();
+        Square s = (Square) board.getSquares().get(input);
+        s.setValue(X);
     }
 }

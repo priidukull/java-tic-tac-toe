@@ -1,17 +1,10 @@
 package priidukull;
 
-class Communication {
+class Alexa {
     private final TicTacToeScanner sc;
 
-    Communication(Factory ticTacToeScannerFactory) {
+    Alexa(Factory ticTacToeScannerFactory) {
         this.sc = (TicTacToeScanner) ticTacToeScannerFactory.createInstance();
-    }
-
-    void printBoard() {
-        System.out.println("_______");
-        System.out.println("|1|2|3|");
-        System.out.println("|4|5|6|");
-        System.out.println("|7|8|9|");
     }
 
     void printPrompt() {
