@@ -1,8 +1,8 @@
-package priidukull;
+package priidukull.scanner;
 
 import java.util.Scanner;
 
-class TicTacToeScanner implements priidukull.Scanner {
+public class TicTacToeScanner implements priidukull.scanner.Scanner {
 
     public String readInput() {
         return new Scanner(System.in).nextLine();

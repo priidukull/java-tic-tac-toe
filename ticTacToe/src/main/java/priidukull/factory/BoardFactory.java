@@ -1,6 +1,6 @@
-package priidukull.board;
+package priidukull.factory;
 
-import priidukull.Factory;
+import priidukull.board.Board;
 
 public class BoardFactory implements Factory {
     public Object createInstance() {

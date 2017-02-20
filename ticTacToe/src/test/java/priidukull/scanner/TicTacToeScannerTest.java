@@ -1,4 +1,4 @@
-package priidukull;
+package priidukull.scanner;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package priidukull;
+package priidukull.scanner;
 
 interface Scanner {
     String readInput();

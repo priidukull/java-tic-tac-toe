@@ -1,20 +1,22 @@
-package priidukull;
+package priidukull.play;
 
 import priidukull.board.Board;
 import priidukull.board.STATE;
 import priidukull.board.Square;
 import priidukull.exceptions.SquareOccupiedException;
+import priidukull.factory.Factory;
+import priidukull.scanner.TicTacToeScanner;
 
-class Alexa {
-    private final TicTacToeScanner sc;
+public class Alexa {
+    private final TicTacToeScanner scanner;
     private Board board;
 
     Board getBoard() {
         return board;
     }
 
-    Alexa(Factory ticTacToeScannerFactory, Factory boardFactory) {
-        this.sc = (TicTacToeScanner) ticTacToeScannerFactory.createInstance();
+    public Alexa(Factory ticTacToeScannerFactory, Factory boardFactory) {
+        this.scanner = (TicTacToeScanner) ticTacToeScannerFactory.createInstance();
         this.board = (Board) boardFactory.createInstance();
     }
 
@@ -23,7 +25,7 @@ class Alexa {
     }
 
     void playerInput(STATE activePlayer) {
-        String input = sc.readInput();
+        String input = scanner.readInput();
         try {
             Integer inputNumber = Integer.parseInt(input);
             if (inputNumber < 1 || inputNumber > 9) {

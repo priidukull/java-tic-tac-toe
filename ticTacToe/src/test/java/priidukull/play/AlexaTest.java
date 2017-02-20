@@ -1,4 +1,4 @@
-package priidukull;
+package priidukull.play;
 
 import org.junit.After;
 import org.junit.Before;
@@ -6,9 +6,11 @@ import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import priidukull.board.Board;
-import priidukull.board.BoardFactory;
+import priidukull.factory.BoardFactory;
 import priidukull.board.STATE;
 import priidukull.board.Square;
+import priidukull.factory.ScannerFactory;
+import priidukull.scanner.TicTacToeScanner;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -20,16 +22,16 @@ import static org.mockito.Mockito.when;
 
 public class AlexaTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private TicTacToeScannerFactory ticTacToeScannerFactory;
+    private ScannerFactory scannerFactory;
     private TicTacToeScanner scanner;
     private BoardFactory boardFactory;
 
     @Before
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
-        ticTacToeScannerFactory = mock(TicTacToeScannerFactory.class);
+        scannerFactory = mock(ScannerFactory.class);
         scanner = mock(TicTacToeScanner.class);
-        when(ticTacToeScannerFactory.createInstance()).thenReturn(scanner);
+        when(scannerFactory.createInstance()).thenReturn(scanner);
         boardFactory = new BoardFactory();
     }
 
@@ -41,9 +43,9 @@ public class AlexaTest {
     @Test
     public void printPromptTest() throws Exception {
         String expected = "Make your move, sir\n";
-        TicTacToeScannerFactory ticTacToeScannerFactory = new TicTacToeScannerFactory();
+        ScannerFactory scannerFactory = new ScannerFactory();
 
-        new Alexa(ticTacToeScannerFactory, boardFactory).printPrompt();
+        new Alexa(scannerFactory, boardFactory).printPrompt();
 
         assertEquals(expected, outContent.toString());
     }
@@ -58,8 +60,8 @@ public class AlexaTest {
                 return "1";
             }
         });
-        when(ticTacToeScannerFactory.createInstance()).thenReturn(scanner);
-        Alexa alexa = new Alexa(ticTacToeScannerFactory, boardFactory);
+        when(scannerFactory.createInstance()).thenReturn(scanner);
+        Alexa alexa = new Alexa(scannerFactory, boardFactory);
 
         alexa.playerInput(STATE.X);
 
@@ -76,8 +78,8 @@ public class AlexaTest {
                 return "1";
             }
         });
-        when(ticTacToeScannerFactory.createInstance()).thenReturn(scanner);
-        Alexa alexa = new Alexa(ticTacToeScannerFactory, boardFactory);
+        when(scannerFactory.createInstance()).thenReturn(scanner);
+        Alexa alexa = new Alexa(scannerFactory, boardFactory);
 
         alexa.playerInput(STATE.X);
 
@@ -94,8 +96,8 @@ public class AlexaTest {
                 return "1";
             }
         });
-        when(ticTacToeScannerFactory.createInstance()).thenReturn(scanner);
-        Alexa alexa = new Alexa(ticTacToeScannerFactory, boardFactory);
+        when(scannerFactory.createInstance()).thenReturn(scanner);
+        Alexa alexa = new Alexa(scannerFactory, boardFactory);
 
         alexa.playerInput(STATE.X);
 
@@ -117,7 +119,7 @@ public class AlexaTest {
                 return "2";
             }
         });
-        Alexa alexa = new Alexa(ticTacToeScannerFactory, boardFactory);
+        Alexa alexa = new Alexa(scannerFactory, boardFactory);
 
         alexa.playerInput(STATE.O);
 

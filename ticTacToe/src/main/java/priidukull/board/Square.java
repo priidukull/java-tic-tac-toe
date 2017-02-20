@@ -27,5 +27,24 @@ public class Square {
     public String toString() {
         return value.equals(STATE.EMPTY) ? Integer.toString(address) : value.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Square)) return false;
+
+        Square square = (Square) o;
+
+        if (getAddress() != square.getAddress()) return false;
+        return getValue() == square.getValue();
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getAddress();
+        result = 31 * result + getValue().hashCode();
+        return result;
+    }
 }
 

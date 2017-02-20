@@ -1,27 +1,28 @@
-package priidukull;
+package priidukull.play;
+
 
 import priidukull.board.STATE;
 
 import static priidukull.board.STATE.O;
 import static priidukull.board.STATE.X;
 
-class TicTacToeRunner implements Runnable {
+public class Turn {
     private Alexa alexa;
     private STATE activePlayer = X;
 
-    TicTacToeRunner(Alexa alexa) {
+    public Turn(Alexa alexa) {
         this.alexa = alexa;
     }
 
     public void run() {
-        while (true) {
+        for (int i=1; i<=9; i++) {
             alexa.getBoard().printBoard();
             alexa.printPrompt();
             playerTurn();
         }
     }
 
-    void playerTurn() {
+    public void playerTurn() {
         alexa.playerInput(activePlayer);
         setActivePlayer();
     }

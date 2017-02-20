@@ -26,4 +26,20 @@ public class Board {
         System.out.println(String.format("|%s|%s|%s|", squares.get(4), squares.get(5), squares.get(6)));
         System.out.println(String.format("|%s|%s|%s|", squares.get(7), squares.get(8), squares.get(9)));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Board)) return false;
+
+        Board board = (Board) o;
+
+        return squares.equals(board.squares);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return squares.hashCode();
+    }
 }
