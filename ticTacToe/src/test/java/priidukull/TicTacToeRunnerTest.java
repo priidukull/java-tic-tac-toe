@@ -3,6 +3,7 @@ package priidukull;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import priidukull.board.BoardFactory;
 import priidukull.board.STATE;
 
 import static org.junit.Assert.assertEquals;
@@ -12,7 +13,8 @@ import static org.mockito.Mockito.when;
 public class TicTacToeRunnerTest {
     @Test
     public void playerTurnTest() {
-        TicTacToeScannerFactory factory = mock(TicTacToeScannerFactory.class);
+        TicTacToeScannerFactory ticTacToeScannerFactory = mock(TicTacToeScannerFactory.class);
+        BoardFactory boardFactory = new BoardFactory();
         TicTacToeScanner scanner = mock(TicTacToeScanner.class);
         when(scanner.readInput()).thenAnswer(new Answer<String>(){
             private int count = 0;
@@ -21,8 +23,8 @@ public class TicTacToeRunnerTest {
                 return String.valueOf(count);
             }
         });
-        when(factory.createInstance()).thenReturn(scanner);
-        Alexa alexa = new Alexa(factory);
+        when(ticTacToeScannerFactory.createInstance()).thenReturn(scanner);
+        Alexa alexa = new Alexa(ticTacToeScannerFactory, boardFactory);
 
         TicTacToeRunner runner = new TicTacToeRunner(alexa);
         runner.playerTurn();

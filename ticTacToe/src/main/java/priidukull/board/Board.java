@@ -14,10 +14,6 @@ public class Board {
         return getSquare(s).getValue();
     }
 
-    public void setSquares(Map squares) {
-        this.squares = squares;
-    }
-
     public Board() {
         for (int i=1; i<=9; i++) {
             squares.put(i, new Square(i));

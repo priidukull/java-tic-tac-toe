@@ -4,6 +4,14 @@ public class Square {
     private int address;
     private STATE value = STATE.EMPTY;
 
+    public int getAddress() {
+        return address;
+    }
+
+    public void setAddress(int address) {
+        this.address = address;
+    }
+
     public STATE getValue() {
         return value;
     }
@@ -12,7 +20,7 @@ public class Square {
         this.value = value;
     }
 
-    Square(int address) {
+    public Square(int address) {
         this.address = address;
     }
 
