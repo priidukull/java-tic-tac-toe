@@ -20,8 +20,8 @@ public class Alexa {
         this.board = (Board) boardFactory.createInstance();
     }
 
-    void printPrompt() {
-        System.out.println("Make your move, sir");
+    void printPrompt(STATE activePlayer) {
+        System.out.println(String.format("Make your move, %s", activePlayer));
     }
 
     void playerInput(STATE activePlayer) {

@@ -14,15 +14,8 @@ public class Turn {
         this.alexa = alexa;
     }
 
-    public void run() {
-        for (int i=1; i<=9; i++) {
-            alexa.getBoard().printBoard();
-            alexa.printPrompt();
-            playerTurn();
-        }
-    }
-
-    public void playerTurn() {
+    void playerTurn() {
+        alexa.printPrompt(activePlayer);
         alexa.playerInput(activePlayer);
         setActivePlayer();
     }

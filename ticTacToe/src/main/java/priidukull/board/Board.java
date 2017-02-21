@@ -1,13 +1,13 @@
 package priidukull.board;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Board {
-    private Map squares = new HashMap<Integer, Square>();
+    private Map<Integer, Square> squares = new HashMap<Integer, Square>();
+    private final List<Integer[]> winCombinations = new ArrayList<Integer[]>();
 
     public Square getSquare(Integer s) {
-        return (Square) squares.get(s);
+        return squares.get(s);
     }
 
     public STATE getValue(Integer s) {
@@ -18,6 +18,14 @@ public class Board {
         for (int i=1; i<=9; i++) {
             squares.put(i, new Square(i));
         }
+        winCombinations.add(new Integer[]{1, 2, 3});
+        winCombinations.add(new Integer[]{1, 5, 9});
+        winCombinations.add(new Integer[]{1, 4, 7});
+        winCombinations.add(new Integer[]{2, 5, 8});
+        winCombinations.add(new Integer[]{3, 5, 7});
+        winCombinations.add(new Integer[]{3, 6, 9});
+        winCombinations.add(new Integer[]{4, 5, 6});
+        winCombinations.add(new Integer[]{7, 8, 9});
     }
 
     public void printBoard() {
@@ -41,5 +49,22 @@ public class Board {
     @Override
     public int hashCode() {
         return squares.hashCode();
+    }
+
+    public STATE winCondition() {
+        for (Integer[] combo : winCombinations) {
+            Set<STATE> result = new HashSet<STATE>();
+            for (int address : combo) {
+                STATE value = getValue(address);
+                result.add(value);
+            }
+            if (result.size() == 1) {
+                STATE winner = result.iterator().next();
+                if(!winner.equals(STATE.EMPTY)) {
+                    return winner;
+                }
+            }
+        }
+        return STATE.EMPTY;
     }
 }

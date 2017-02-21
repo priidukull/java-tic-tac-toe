@@ -41,8 +41,6 @@ public class TicTacToeRunnerTest {
         expectedBoard.getSquare(5).setValue(STATE.X);
         expectedBoard.getSquare(6).setValue(STATE.O);
         expectedBoard.getSquare(7).setValue(STATE.X);
-        expectedBoard.getSquare(8).setValue(STATE.O);
-        expectedBoard.getSquare(9).setValue(STATE.X);
         ScannerFactory scannerFactory = mock(ScannerFactory.class);
         TicTacToeScanner ticTacToeScanner = mock(TicTacToeScanner.class);
         BoardFactory boardFactory = mock(BoardFactory.class);

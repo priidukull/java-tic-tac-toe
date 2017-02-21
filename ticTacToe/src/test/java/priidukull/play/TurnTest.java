@@ -1,5 +1,7 @@
 package priidukull.play;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -8,11 +10,26 @@ import priidukull.board.STATE;
 import priidukull.factory.ScannerFactory;
 import priidukull.scanner.TicTacToeScanner;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class TurnTest {
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+    @Before
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @After
+    public void cleanUpStreams() {
+        System.setOut(null);
+    }
+
     @Test
     public void playerTurnTest() {
         ScannerFactory scannerFactory = mock(ScannerFactory.class);

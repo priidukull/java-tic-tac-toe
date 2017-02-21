@@ -42,10 +42,10 @@ public class AlexaTest {
 
     @Test
     public void printPromptTest() throws Exception {
-        String expected = "Make your move, sir\n";
+        String expected = "Make your move, X\n";
         ScannerFactory scannerFactory = new ScannerFactory();
 
-        new Alexa(scannerFactory, boardFactory).printPrompt();
+        new Alexa(scannerFactory, boardFactory).printPrompt(STATE.X);
 
         assertEquals(expected, outContent.toString());
     }
@@ -54,6 +54,7 @@ public class AlexaTest {
     public void playerInputWithNonNumericInputTest() throws Exception {
         when(scanner.readInput()).thenAnswer(new Answer<String>() {
             private int count = 0;
+
             public String answer(InvocationOnMock invocation) throws Throwable {
                 if (count++ == 0)
                     return "foo";
@@ -72,6 +73,7 @@ public class AlexaTest {
     public void playerInputNotInRangeTest() {
         when(scanner.readInput()).thenAnswer(new Answer<Object>() {
             private int count = 0;
+
             public String answer(InvocationOnMock invocation) throws Throwable {
                 if (count++ == 0)
                     return "11";
@@ -90,6 +92,7 @@ public class AlexaTest {
     public void playerInputFloatTest() {
         when(scanner.readInput()).thenAnswer(new Answer<Object>() {
             private int count = 0;
+
             public String answer(InvocationOnMock invocation) throws Throwable {
                 if (count++ == 0)
                     return "5.1";
@@ -113,6 +116,7 @@ public class AlexaTest {
         square.setValue(STATE.X);
         when(scanner.readInput()).thenAnswer(new Answer<Object>() {
             private int count = 0;
+
             public String answer(InvocationOnMock invocation) throws Throwable {
                 if (count++ == 0)
                     return "1";
